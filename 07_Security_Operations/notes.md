@@ -473,6 +473,30 @@ Site perimeter → Building perimeter → Data center floor → Server cage → 
 
 ---
 
+## 7.15 Recovery Site and Backup — Tricky Distinctions
+
+### Reciprocal Agreement Limitations (often overlooked)
+- Two organizations agree to use each other's facilities during a disaster.
+- **Problem:** If both are in the same geographic area, the same disaster (hurricane, flood) hits both simultaneously.
+- **Problem:** The "host" organization may not have spare capacity when the partner needs it.
+- **Problem:** Compatibility issues — different hardware, software versions, network topology.
+- **Best for:** Organizations with unique equipment needs, tight budgets. Should never be the sole DR strategy.
+
+### Tape Backup Transport
+- Backup tapes in transit are as sensitive as the data they contain.
+- Controls: encryption of tapes before transport, locked tamper-evident cases, bonded courier, chain of custody documentation, offsite vault with access control.
+- **Exam trap:** "The company backs up to tape and stores tapes in a fireproof safe in the same building" — this is NOT offsite backup. The 3-2-1 rule requires 1 copy offsite (different geographic location).
+
+### MTD Ownership — Non-Negotiable Rule
+> **The business owner sets MTD. IT cannot change it unilaterally.**
+
+If the business says "we can survive 4 hours of payroll system downtime," IT must build a recovery capability that meets or beats 4 hours. If that's impossible with current resources, the conversation escalates to management for a budget decision — not a unilateral IT decision to accept more downtime.
+
+> **Tricky Scenario:** The CFO says the financial close system has an MTD of 1 hour. IT calculates the RTO would be 6 hours given current backup infrastructure. What is the correct action?
+> **Answer:** Escalate to senior management with a cost/benefit analysis. Options: (1) invest in hot-site/real-time replication to meet the 1-hour MTD, (2) the CFO formally revises the MTD upward (accepting more risk), or (3) compensating controls reduce impact. IT cannot simply accept the gap — this is a management decision about residual risk, not a technical one.
+
+---
+
 ## 7.15 Exam Tips Summary
 
 - **Order of volatility** — capture RAM before disk.

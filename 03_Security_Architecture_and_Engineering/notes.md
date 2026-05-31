@@ -486,6 +486,19 @@ Attacker breaks out of VM to access hypervisor or other VMs. Severe — compromi
 
 ---
 
+## 3.11 Covert Channels and TEMPEST
+
+- **Covert Storage Channel:** Data leaked by modifying a shared storage resource (e.g., writing data to a file that another process reads as a signal). Hard to detect — doesn't use normal communication paths.
+- **Covert Timing Channel:** Data leaked by modulating timing of operations (e.g., process A holds a mutex for 1 second = signal "1", releases instantly = signal "0"). Extremely difficult to eliminate entirely.
+- **TEMPEST:** Countermeasures against electromagnetic emanation eavesdropping. Monitors and equipment emit EM signals that can be intercepted to reconstruct data (Van Eck phreaking).
+  - **Faraday Cage:** Metal enclosure that blocks external EM fields and prevents EM signals from escaping.
+  - **TEMPEST-certified equipment:** Shielded hardware that limits emanations to NIST/NSA-approved levels.
+
+> **Tricky Scenario:** An attacker parks outside a secure government building and uses specialized equipment to read the data being displayed on CRT monitors inside by capturing the EM emissions through the walls. What type of attack is this?
+> **Answer: TEMPEST / Van Eck phreaking** — exploiting electromagnetic emanations. The countermeasure is TEMPEST-certified hardware, Faraday shielding, or using LCD/flat-panel monitors (lower EM emissions than CRTs). This is a covert channel attack that bypasses all network security controls entirely.
+
+---
+
 ## 3.11 Exam Tips Summary
 
 - **Bell-LaPadula** = Confidentiality (no read up, no write down).

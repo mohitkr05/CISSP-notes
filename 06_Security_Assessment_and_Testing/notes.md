@@ -326,6 +326,37 @@ Evaluates how a proposed change to a system affects its security posture:
 
 ---
 
+## 6.12 Threat Modeling Methodologies — Assessment Context
+
+Threat modeling belongs in the **design phase** of the SDLC — finding threats before code is written. Key frameworks:
+
+| Framework | Developer | Focus | Best For |
+|-----------|----------|-------|---------|
+| **STRIDE** | Microsoft | 6 threat categories mapped to CIA+AN | Application design |
+| **PASTA** | vSpRINT | 7-stage risk-centric process | Enterprise risk-aligned dev |
+| **DREAD** | Microsoft | Quantitative risk scoring (1-10) | Prioritizing findings |
+| **TRIKE** | Community | Threat-risk-centric; uses requirement models | Defensive requirements |
+| **VAST** | ThreatModeler | Visual, Agile, and scalable | DevSecOps pipelines |
+| **Attack Trees** | Schneier | Hierarchical goal-based attack decomposition | Complex system analysis |
+
+> **Exam rule:** When a question mentions threat modeling as an organizational process for a new enterprise system → **SABSA** (architecture-level). When it's specifically about application threat modeling in the SDLC → **STRIDE or PASTA**. STRIDE is the most tested.
+
+### Penetration Test Scope Types
+
+| Scope | Description | Exam Use |
+|-------|-------------|---------|
+| **Full-scope** | All systems, all methods, no restrictions | Most comprehensive |
+| **Partial/targeted** | Only specific systems or application layers | Common for compliance |
+| **Network pen test** | Infrastructure, firewalls, routing | External/internal network |
+| **Web application pen test** | OWASP Top 10 focus | App-specific |
+| **Social engineering pen test** | Phishing, vishing, physical | Human factor testing |
+| **Red team engagement** | Simulated adversary; includes physical + cyber | Full attack chain realism |
+
+> **Tricky Scenario:** A company passes their annual PCI-DSS penetration test with zero critical findings. The CISO declares the environment "secure." Is this correct?
+> **Answer: No.** A penetration test only covers what was in scope, using the techniques the tester employed, in the time allotted. Zero findings means "no exploitable paths were found within these constraints" — not "the environment is secure." Additionally, PCI-DSS requires an ASV scan (quarterly) AND an annual pen test — passing one doesn't validate everything. New vulnerabilities emerge daily.
+
+---
+
 ## 6.12 Exam Tips Summary
 
 - **Penetration testing requires written authorization** — always, no exceptions.

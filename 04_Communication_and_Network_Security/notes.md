@@ -403,6 +403,28 @@ Documenting normal network behavior — critical for anomaly detection:
 
 ---
 
+## 4.15 Wireless Attacks — Deep Dive
+
+### WPA2 KRACK Attack (Key Reinstallation Attack)
+- Exploits the WPA2 four-way handshake by forcing nonce reuse during key installation.
+- Allows decryption and replay of encrypted traffic on WPA2 networks.
+- **Mitigation:** Patch clients (not APs) — the vulnerability is on the supplicant side. Use HTTPS/TLS for all traffic as a defense-in-depth measure.
+
+### PMKID Attack (WPA2/WPA3 weakness)
+- Attacker can capture a single EAPOL frame from the AP (no client needed) and attempt offline dictionary attack against the PMK.
+- Works against WPA2-Personal networks using weak passwords.
+- **Mitigation:** Use long, random PSK (20+ characters); consider WPA3.
+
+### Evil Twin / Rogue AP
+- Attacker creates an AP with the same SSID as a legitimate network; clients connect automatically.
+- Man-in-the-Middle position on all connected traffic.
+- **Mitigation:** 802.1X (EAP-TLS requires certificate validation — client verifies the server certificate, preventing connection to a fake AP); wireless IDS to detect rogue APs.
+
+> **Tricky Scenario:** An employee connects to a coffee shop WiFi named "CoffeeShop_Free." An attacker nearby also has an AP named "CoffeeShop_Free" broadcasting at higher power. The employee's device connects to the evil twin instead. What category of attack is this, and what would HAVE protected the employee?
+> **Answer: Evil Twin attack.** If the company's VPN required always-on connection, all traffic would be encrypted through the VPN tunnel regardless of which WiFi the device connected to. HTTPS on all sites also limits damage. WPA3 with SAE alone doesn't prevent evil twin — the rogue AP can also use WPA3. Certificate-based authentication (EAP-TLS) on 802.1X networks prevents this, but that only applies to corporate Wi-Fi, not public hotspots.
+
+---
+
 ## 4.15 Exam Tips Summary
 
 - Know the **OSI model layers** and which devices/protocols operate at each.

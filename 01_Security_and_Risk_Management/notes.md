@@ -392,6 +392,21 @@ Key prohibitions include: unauthorized access, using computers to harm others, i
 
 ---
 
+## 1.9 Risk Tolerance vs. Risk Appetite vs. Risk Capacity
+
+| Term | Definition | Set By | Variable? |
+|------|-----------|--------|----------|
+| **Risk Appetite** | Broad level of risk the org is willing to accept strategically | Board / Senior Management | Rarely changes |
+| **Risk Tolerance** | Acceptable variance around the appetite for day-to-day decisions | Security management | More variable |
+| **Risk Capacity** | Maximum risk the org can absorb before catastrophic failure | Financial / actuarial | Fixed by org size/resources |
+
+> **Exam trap:** Risk **tolerance** (not appetite) is what drives actual control decisions. Risk appetite is the strategic statement; tolerance is the operational threshold. When a question asks "what metric is used to make day-to-day security control decisions?" → **risk tolerance**.
+
+> **Scenario — Risk Tolerance in Practice:**
+> A bank has a risk appetite statement: "We do not accept risks that could cause reputational harm." The risk tolerance for PCI-DSS non-compliance is zero — any control gap must be remediated within 30 days (highly intolerant). For low-severity informational vulnerabilities on internal dev servers, the tolerance is higher — they can accept a 90-day remediation window. Same risk appetite, different tolerance levels applied to different contexts.
+
+---
+
 ## 1.9 Security Policy Framework — Deeper Detail
 
 ### Types of Policies
@@ -474,6 +489,27 @@ Recovery should be in order of business criticality:
 | **PAPA** | Privacy, Accuracy, Property, Accessibility (Mason's ethics) |
 | **PPT** | People, Process, Technology (balanced security) |
 | **DIRT** | Directive, Investigative (detective), Recovery, Termination (preventive) |
+
+---
+
+## 1.13 Intellectual Property — Exam Critical Details
+
+| IP Type | Duration | Registration Required? | Lost If? |
+|---------|---------|----------------------|---------|
+| **Copyright** | Life + 70 years | No (automatic on creation) | Never (expires on schedule) |
+| **Patent** | 20 years | Yes (full public disclosure) | Expires at end of term |
+| **Trademark** | Indefinite with renewal | Yes (for federal protection) | Not renewed, or becomes generic |
+| **Trade Secret** | Indefinite | No | Secret is disclosed |
+
+- **Economic Espionage Act (EEA):** Federal US law criminalizing trade secret theft — both domestic and foreign-sponsored.
+- **DMCA (Digital Millennium Copyright Act):** Makes it illegal to circumvent digital rights management (DRM) systems, even if the underlying work is legally owned.
+- **Wassenaar Arrangement:** 42-country treaty regulating export of dual-use goods including encryption software — a CISO must evaluate this before exporting products with crypto capabilities.
+
+> **Tricky Scenario:** A company releases open-source software with a strong encryption library. A foreign buyer wants to purchase it. What legal framework governs the export?
+> **Answer: Wassenaar Arrangement + EAR (Export Administration Regulations).** Strong encryption (key length > 64-bit) requires an export license or falls under a license exception depending on the destination country and end-user type. Not checking these regulations before export = potential federal violation.
+
+> **Patent vs. Trade Secret Decision:**
+> A company invents a revolutionary manufacturing process. Patent = published in 20 years, anyone can use it freely after expiration, and the application disclosure is public immediately. Trade secret = no expiration, no public disclosure, but if a competitor independently discovers the same process, they can use it freely (no infringement). If the process can be reverse-engineered, patent it. If it can genuinely be kept secret (like Coca-Cola's formula), trade secret is stronger.
 
 ---
 

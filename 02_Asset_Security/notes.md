@@ -315,6 +315,21 @@ Document confirming proper disposal — required for compliance (HIPAA, PCI-DSS,
 
 ---
 
+## 2.11 Aggregation and Inference Attacks on Data
+
+These attacks exploit the gap between what individual data points reveal and what combined data reveals.
+
+- **Aggregation:** Combining multiple low-sensitivity data items to derive high-sensitivity conclusions. Each individual item is innocuous; the combination is sensitive.
+  - Example: Name (public) + Employer (public) + Medical condition (private) + Home address (public) = targeted stalking dataset.
+- **Inference:** Deriving sensitive information from permitted queries or publicly available data.
+  - Example: A database returns "0 results" for a specific rare-disease query — this absence itself reveals no matching records exist, confirming no one in that category is in the database.
+- **Countermeasures:** Data minimization, cell suppression (don't return results below minimum count), query result aggregation, noise injection in statistical datasets.
+
+> **Tricky Scenario:** A researcher queries an anonymized health database: "How many patients in ZIP 10001 over age 80 have pancreatic cancer?" The result is 1. The researcher knows only one person matching that description — their neighbor. The query itself was legitimate. The result revealed PHI through inference.
+> **Answer:** The control is **cell suppression** — never return results where the cell count is below a threshold (e.g., suppress results of N < 5). This prevents exact identification even through permitted queries.
+
+---
+
 ## 2.11 Exam Tips Summary
 
 - The **data owner** makes classification decisions; the **custodian** implements them.

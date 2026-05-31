@@ -399,6 +399,24 @@ Adjusts authentication requirements based on risk signals:
 
 ---
 
+## 5.13 Need to Know vs. Least Privilege — Critical Distinction
+
+These two principles are frequently confused on the exam but are fundamentally different:
+
+| Principle | Controls | Applied To | Layer |
+|-----------|---------|-----------|-------|
+| **Least Privilege** | Minimum system permissions needed to do the job | System rights, roles, access levels | Technical enforcement |
+| **Need to Know** | Must have a demonstrated business need for specific data, even within clearance level | Specific data items or files | Policy enforcement |
+
+- **Clearance ≠ Access:** Having TOP SECRET clearance does NOT mean you can access all TOP SECRET documents. You must also satisfy need-to-know for each specific dataset.
+- **Least privilege** limits HOW MUCH access (read vs. read/write, one system vs. many).
+- **Need to know** limits WHICH SPECIFIC DATA even within an already-privileged scope.
+
+> **Tricky Scenario:** An analyst has SECRET clearance and access to the "Signals Intelligence" compartment. Their friend in the adjacent office is working on a "Human Intelligence" program, also at SECRET level. Can the analyst access the HUMINT files since they're both at SECRET?
+> **Answer: No.** Different compartments require separate need-to-know authorization. Clearance level is necessary but insufficient — each compartment/project requires specific authorization. This is why the US intelligence community uses **compartmented information** (SCI — Sensitive Compartmented Information), adding a third layer beyond clearance: access to specific "compartments" or "caveats."
+
+---
+
 ## 5.13 Exam Tips Summary
 
 - **MFA** requires factors from **different categories** (not two passwords).

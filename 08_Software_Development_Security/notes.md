@@ -442,6 +442,32 @@ Agreement where source code is deposited with a neutral third party (escrow agen
 
 ---
 
+## 8.13 Change Management in Software — CAB and Emergency Changes
+
+The Change Advisory Board (CAB) and change management apply to software just as much as infrastructure:
+
+- **Standard Change:** Pre-approved, low-risk, follows a documented procedure (e.g., routine library version bump). No CAB meeting needed.
+- **Normal Change:** Requires CAB review and approval before implementation. Includes rollback plan.
+- **Emergency Change:** Critical security patch (zero-day exploitation in the wild). Expedited approval — but still requires documented authorization from designated approvers (emergency CAB or CISO + change manager). Never bypass entirely.
+
+> **Tricky Scenario:** A critical CVE (CVSS 10.0) is released for a library your application uses, with active exploitation in the wild. The developer says "I can push the patch in 30 minutes, let's skip the CAB." What should happen?
+> **Answer:** Invoke the emergency change process. This means: get expedited approval from the designated emergency approvers (not full CAB, but not zero approval either), document the change and reason, ensure there is a rollback plan (can you revert if the patch breaks something?), then deploy. The emergency process exists specifically for this scenario — use it, don't bypass governance entirely. Post-implementation, document and close the emergency change formally.
+
+### Secure SDLC — Where Security Activities Belong
+
+| SDLC Phase | Security Activity | Why Here |
+|-----------|------------------|---------|
+| **Requirements** | Security/privacy requirements, misuse cases | Define what "secure" means for this system |
+| **Design** | Threat modeling (STRIDE), security architecture review | Cheapest time to fix design flaws |
+| **Development** | SAST, peer code review, secure coding standards | Catch issues as code is written |
+| **Testing** | DAST, IAST, penetration test, fuzz testing | Validate security in running application |
+| **Deployment** | Config review, secrets management, IaC scan | Harden before going live |
+| **Maintenance** | Continuous scanning, patch management, bug bounty | Sustain security posture over time |
+
+> **Exam rule:** Threat modeling → **design phase**. Penetration testing → **testing/pre-deployment phase**. Patch management → **maintenance phase**. Code review → **development phase**. Questions will try to place these in the wrong phases.
+
+---
+
 ## 8.13 Exam Tips Summary
 
 - **SAST** = static analysis (source code, no execution). **DAST** = dynamic (running app, black-box).
