@@ -84,6 +84,22 @@ Client → ACK → Server
 
 ---
 
+## 4.2b Converged Protocols
+
+Converged protocols **encapsulate specialized traffic inside standard IP packets**, allowing storage or voice traffic to run over existing network infrastructure. The catch: they inherit all TCP/IP vulnerabilities.
+
+| Protocol | What It Does | Inherited Risk |
+|----------|-------------|---------------|
+| **FCoE** (Fibre Channel over Ethernet) | SAN storage traffic over Ethernet | Sniffing, man-in-the-middle on storage traffic |
+| **iSCSI** (Internet Small Computer System Interface) | Block-level storage over IP/TCP | Unencrypted storage data on shared networks |
+| **VoIP** (Voice over IP) | Voice calls over IP networks | Eavesdropping, call spoofing, DoS |
+
+> **Exam Point:** The managerial takeaway is that treating these as "different" from regular IP traffic is a mistake. A network engineer says "our SAN is on FCoE — it's separate." A CISSP says "FCoE runs over Ethernet; any Layer 2/3 network attack (ARP poisoning, VLAN hopping, sniffing) can affect it." OSI Layer knowledge is needed to understand **why** these managerial choices matter.
+>
+> **OSI Layer Knowledge for Managers:** You don't need to be a CCIE, but you must know that a **router is Layer 3** and a **switch is Layer 2** to decipher why a proposed network segmentation design actually provides (or fails to provide) security boundaries.
+
+---
+
 ## 4.3 Network Devices and Their Security Roles
 
 ### Firewalls

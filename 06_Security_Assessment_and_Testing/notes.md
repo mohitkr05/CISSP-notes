@@ -140,10 +140,16 @@ SOC reports are independent auditor assessments of service organization controls
 
 | Type | Description | Covers |
 |------|-------------|--------|
-| **Type I** | Point-in-time assessment | Are controls designed appropriately? |
-| **Type II** | Period of time assessment (6+ months) | Are controls operating effectively over time? |
+| **Type I** | Point-in-time assessment ("paperwork") | Are controls **designed** appropriately? |
+| **Type II** | Period of time assessment (6+ months) | Are controls **operating effectively** over time? |
 
-> **Exam Tip:** **Type II is stronger** than Type I — it proves controls actually work over a sustained period, not just on a single audit day. When evaluating vendor security, prefer Type II reports.
+> **Exam Tip:** **Type II is stronger** than Type I — it proves controls actually work over a sustained period, not just on a single audit day. When evaluating vendor security, always prefer **Type II** reports.
+>
+> **Key Distinction Memory Hook:**
+> - **Type I** = "design review" = a snapshot in time = a photo of the controls on audit day
+> - **Type II** = "operating effectiveness" = a video of the controls over 6+ months = far more reliable
+>
+> A vendor who only provides Type I has only proven they *had* the controls on one day. Type II proves the controls consistently operated throughout the period.
 
 > **Scenario — SOC Report Selection in Vendor Due Diligence:**
 > Your company is evaluating a cloud payroll provider. The vendor offers you a SOC 2 Type I report from last month.

@@ -36,6 +36,13 @@ Roles: incident handler, forensic analyst, legal liaison, communications lead, m
 
 > **Exam Tip:** The first priority in incident response is always **containment** — stopping the spread — not evidence collection. However, if forensic investigation is required, **preservation of evidence** may come before eradication.
 
+> **Managerial IR Decision — Virus vs. Worm:**
+> A server has a **low-impact virus**. A manager might choose to **keep it running** to continue generating revenue and plan to disconnect it after business hours for remediation — the business impact of the virus is lower than the impact of an outage. This is a valid risk-acceptance decision.
+>
+> If it is a **worm actively spreading to other servers**, disconnect it **immediately** — worms self-propagate, so every second of delay multiplies the damage exponentially. No revenue justification outweighs stopping exponential spread. This is a **containment-first** decision.
+>
+> **The CISSP principle:** Always weigh business impact against security response. The correct answer is context-dependent — but when the threat is propagating (worm, ransomware spreading), containment is non-negotiable.
+
 > **Scenario — IR Phase Sequencing (the tricky exam question):**
 > At 2 AM, the SOC detects ransomware actively encrypting files across 50 servers. The CISO calls you. What's the priority order?
 >
@@ -187,6 +194,9 @@ Request → Review → Approval → Test → Implement → Document → Review
 - **CMDB** — tracks all IT assets, their configurations, and relationships
 - **Baseline configuration** — approved starting state for all systems
 - **Configuration drift** — deviation from baseline (detected by continuous monitoring)
+
+> **Change Management Primary Goal:**
+> The primary goal of change management is to **prevent security compromises** caused by unauthorized or untested modifications. Changes — even well-intentioned ones — can introduce vulnerabilities, cause outages, or create configuration drift. Every change must be reviewed, tested, approved, and documented before implementation.
 
 ### Patch Management Process
 ```

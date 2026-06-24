@@ -130,6 +130,14 @@ Dynamic elevation of authentication requirements based on risk level of the requ
 | RBAC | Roles | Medium-High | Enterprise IT |
 | ABAC | Attributes/policies | Highest | Cloud, API access |
 
+> **Classic Exam Scenario — First Contact with Aliens:**
+> Humans make contact with aliens and want to learn about them without revealing human weaknesses. Which access model is best?
+>
+> - **MAC** is too rigid — the strict label-based system doesn't allow the dynamic, situation-dependent information sharing that first contact requires.
+> - **ABAC (or RBAC)** is the right answer — it allows **flexibility** (share some things but not others, based on context) while maintaining **strict boundaries** (no access to classified human military data). Attributes like "topic = astronomy" (allowed) vs. "topic = defense systems" (denied) make ABAC ideal for nuanced, contextual access control across organizational (or species) boundaries.
+>
+> **Why this matters:** The exam often uses unusual scenarios to test whether you understand the *properties* of each model, not just the name. ABAC = maximum flexibility + fine-grained control. MAC = maximum rigidity. DAC = maximum owner flexibility but minimum central control.
+
 ---
 
 ## 5.5 Authentication Protocols
@@ -202,7 +210,7 @@ User authenticates once and gains access to multiple systems without re-authenti
 Extension of SSO across organizational boundaries. Allows users from one organization to access resources in another using their home organization credentials.
 
 ### SAML (Security Assertion Markup Language)
-XML-based standard for exchanging authentication and authorization data between Identity Provider (IdP) and Service Provider (SP).
+**XML-based** standard for exchanging **authentication and authorization** data between Identity Provider (IdP) and Service Provider (SP). SAML is the primary technology enabling **Federated Identity** — allowing a user authenticated at Organization A to access resources at Organization B without a second login.
 
 **SAML Flow:**
 ```

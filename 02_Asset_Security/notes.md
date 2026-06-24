@@ -43,6 +43,9 @@ Data classification should be based on:
 ### Reclassification
 Data can be **downgraded** (declassified) when it no longer requires the original protection level. All reclassification must be documented.
 
+> **Tricky Question — Access Violations First Step:**
+> If an organization identifies access violations, the instinct is to implement a new technical control (audit logging, stricter ACLs). But the CISSP managerial answer is often to first **review and update the policy** to ensure the policy itself is correct and complete before adding technical enforcement. Technical controls implement policy — if the policy is wrong or missing, the control solves the wrong problem.
+
 ---
 
 ## 2.2 Data Ownership Roles
@@ -56,6 +59,11 @@ Data can be **downgraded** (declassified) when it no longer requires the origina
 | **Data Processor** (GDPR) | Processes personal data on behalf of the controller | SaaS vendor |
 | **Data Controller** (GDPR) | Determines purposes and means of processing | The organization itself |
 | **System Owner** | Responsible for a system that stores/processes data | Application owner |
+
+> **Key Distinction — Owner vs. Custodian (very commonly tested):**
+> - The **Data Owner** is typically **management** (e.g., a VP or department head). They are responsible for **classifying** data and **determining the level of protection** it requires. They decide the "what."
+> - The **Data Custodian** is typically **IT staff**. They **implement** the protections the owner specifies: performing backups, maintaining logs, applying encryption, and managing access controls. They execute the "how."
+> - **Mnemonic:** Owner = Decision maker (management). Custodian = IT implementer (staff).
 
 ---
 

@@ -239,3 +239,123 @@ Rubber-stamp approvals during recertification defeat the purpose of the review. 
 
 **Answer: B**
 **Orphaned accounts** have no active owner — the associated user or system no longer exists. They present a serious risk because: no one monitors them for suspicious activity, they may retain broad permissions, and they can be exploited by attackers for persistent, undetected access.
+
+---
+
+**Q21.** Which IAM protocol was identified as appearing frequently on 2026 CISSP exams and is commonly tested for its role in API authorization?
+
+- A) SAML
+- B) Kerberos
+- C) OAuth 2.0
+- D) LDAP
+
+**Answer: C**
+**OAuth 2.0** is a high-frequency exam topic in 2026, tested for its role in **API authorization** — allowing third-party apps to access resources on behalf of users without sharing passwords. It is frequently confused with SAML (federated SSO) and OIDC (authentication). Know all three and when each applies.
+
+---
+
+**Q22.** Humans make first contact with aliens and want to share scientific data without revealing defense capabilities. Which access control model BEST supports this requirement?
+
+- A) MAC — rigid label-based control enforced by the security kernel
+- B) DAC — resource owners grant access at their discretion
+- C) ABAC — flexible, attribute-driven access control
+- D) RBAC — role-based access aligned to job function
+
+**Answer: C**
+**ABAC** is the best fit: it allows dynamic, context-sensitive access decisions based on attributes of the subject (human), the object (data type), and the environment (sensitivity). Scientific data (attribute = "scientific") can be shared while defense data (attribute = "classified-military") is denied — without rigid labels or pre-defined roles. MAC is too inflexible; DAC provides no central control.
+
+---
+
+**Q23.** SAML uses which data format for exchanging authentication assertions between Identity Provider and Service Provider?
+
+- A) JSON (JavaScript Object Notation)
+- B) XML (eXtensible Markup Language)
+- C) JWT (JSON Web Token)
+- D) SOAP envelope
+
+**Answer: B**
+**SAML (Security Assertion Markup Language)** is explicitly **XML-based**. Assertions are structured XML documents signed with the IdP's private key. This is a key distinguishing feature: SAML = XML assertions; OAuth/OIDC = JSON/JWT tokens. Knowing this distinction separates correct from incorrect answers on federated identity questions.
+
+---
+
+**Q24.** A biometric system at a high-security facility has a FAR of 0.001% and an FRR of 8%. What is the likely security and usability implication?
+
+- A) The system is well-balanced — both error rates are acceptable
+- B) The system has very low security risk but very high user rejection rate — legitimate users are frequently denied
+- C) The system has very high security risk with a high false acceptance rate
+- D) The system cannot be compared without knowing the CER
+
+**Answer: B**
+A FAR of 0.001% means almost no unauthorized person is accepted (very high security). An FRR of 8% means **8% of legitimate users are rejected** at each attempt — a significant usability problem that may lead to workarounds (propped doors, shared credentials). The sensitivity is tuned too high, increasing FRR at the expense of user experience while maintaining strong security.
+
+---
+
+**Q25.** An employee is terminated on a Friday afternoon. IT receives the notification Monday morning and disables the account then. What risk existed over the weekend?
+
+- A) The account was still active and could have been used for unauthorized access
+- B) The employee's data was automatically deleted by the system
+- C) The employee could have changed their password, locking IT out
+- D) This is acceptable; weekend access is not monitored anyway
+
+**Answer: A**
+A **72-hour window** where a terminated employee's account remains active is a critical risk — especially for hostile terminations. The account could be used to exfiltrate data, sabotage systems, or establish persistence (backdoors). Best practice: disable accounts **immediately** at the moment of termination notification, not at IT's next business day convenience.
+
+---
+
+**Q26.** In the Kerberos flow, what does the client present to the Ticket Granting Service (TGS) to obtain a service ticket?
+
+- A) The user's password hash
+- B) The Ticket Granting Ticket (TGT)
+- C) The service account's NTLM hash
+- D) The client's digital certificate
+
+**Answer: B**
+After initial authentication to the AS, the client receives a **TGT** (Ticket Granting Ticket). To access a specific service (file share, database), the client presents the TGT to the **TGS**, which issues a service-specific ticket. The user's password is only used once at initial login — Kerberos is designed so the password never travels on the network.
+
+---
+
+**Q27.** What is the MAIN security difference between RADIUS and TACACS+ encryption?
+
+- A) RADIUS encrypts all fields; TACACS+ encrypts only the password
+- B) TACACS+ encrypts the entire authentication packet; RADIUS encrypts only the password field
+- C) Both encrypt all data but use different algorithms
+- D) Neither protocol encrypts authentication data by default
+
+**Answer: B**
+**TACACS+** encrypts the **entire packet body** (all fields). **RADIUS** encrypts **only the password** field — usernames, accounting data, and authorization attributes travel in cleartext. For device administration (routers, switches), TACACS+ is preferred because admin commands in authorization packets are also encrypted.
+
+---
+
+**Q28.** What does FIDO2 / WebAuthn use to eliminate passwords and phishing risk?
+
+- A) One-time passwords sent via SMS
+- B) Hardware security keys or biometrics bound to a specific origin (domain)
+- C) Software-generated TOTP codes
+- D) Smart cards with X.509 certificates
+
+**Answer: B**
+**FIDO2 / WebAuthn** uses **public-key cryptography** where the private key is stored on a hardware security key or device TPM/secure enclave. Authentication is **origin-bound** — credentials are cryptographically tied to the specific domain, making them impossible to phish to a different site. No password is ever transmitted or stored.
+
+---
+
+**Q29.** An organization's access review shows a user has accumulated 14 different system roles over 6 years and multiple job changes. What corrective action should be taken first?
+
+- A) Delete the user account and recreate it with only current role permissions
+- B) Conduct a role-by-role review with the user's current manager and revoke all roles no longer required
+- C) Implement MFA on all 14 system roles as a compensating control
+- D) Notify the user that their access is under review
+
+**Answer: B**
+The correct remediation for **access creep** is a structured **access recertification** review: the current manager validates each role, and any access not justified by the current job function is revoked. Deleting the account loses the audit trail. MFA does not reduce excess access — it only adds an authentication factor. The root problem is authorization, not authentication.
+
+---
+
+**Q30.** An organization deploys context-aware (adaptive) authentication. A user logs in from a country they have never accessed from before at 3 AM local time. What should the system do?
+
+- A) Deny the login outright regardless of credentials
+- B) Allow access if the correct password is provided
+- C) Trigger step-up authentication requiring a second factor
+- D) Immediately lock the account and alert the security team
+
+**Answer: C**
+**Adaptive / context-aware authentication** uses risk signals (unusual location, unusual time, impossible travel) to dynamically increase authentication requirements. A new country + unusual hours is a high-risk signal that should trigger **step-up authentication** (MFA challenge) rather than an outright deny (which would block legitimate users traveling) or silent allow (which accepts potentially stolen credentials).

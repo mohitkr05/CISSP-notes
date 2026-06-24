@@ -239,3 +239,123 @@ The specific finding is about alert threshold tuning. The most direct and target
 
 **Answer: C**
 Total downtime = 3.5 hours (restore) + 2 hours (WRT verification) = **5.5 hours**. This exceeds the RTO of 4 hours but is within the MTD of 6 hours. The RTO was missed, but the MTD was met. (RTO + WRT must be ≤ MTD; 3.5 + 2 = 5.5 ≤ 6 ✓)
+
+---
+
+**Q21.** A server is found to have a low-impact virus that does not affect its output or spread to other systems. The server generates $50,000 in revenue per hour. A manager decides to let it run during business hours and take it offline after close. Which concept does this demonstrate?
+
+- A) Negligence — the manager should immediately shut the server down
+- B) Risk acceptance — the manager has weighed business impact against security risk and made a documented decision
+- C) Risk avoidance — continuing to operate the server eliminates the risk
+- D) Violation of the incident response policy — containment must always come first
+
+**Answer: B**
+This is a valid **risk acceptance** decision. The manager weighed the business cost of downtime ($50K/hour revenue loss) against the security risk (low-impact, non-spreading virus) and decided the controlled operation until after hours was acceptable. CISSP recognizes that business-impact decisions belong to management, and risk acceptance with awareness is a legitimate strategy for low-impact threats.
+
+---
+
+**Q22.** A worm is discovered spreading to additional servers across the network at an accelerating rate. What is the FIRST action the security team should take?
+
+- A) Capture RAM from all infected servers before taking any action
+- B) Identify the entry point (patient zero) before containing the spread
+- C) Immediately isolate infected systems from the network to stop the spread
+- D) Notify senior management and wait for authorization to act
+
+**Answer: C**
+**Worms self-replicate exponentially** — every second of delay multiplies the number of infected systems. Containment (network isolation) is the **immediate first action**. Evidence collection is important but secondary when a propagating threat is actively spreading. Unlike a static virus, a worm's damage scales with time — stop the spread first.
+
+---
+
+**Q23.** What is the PRIMARY goal of the change management process from a security perspective?
+
+- A) To ensure all changes are documented for audit purposes
+- B) To prevent security compromises caused by unauthorized or untested modifications
+- C) To slow down the deployment process so security teams can review all code
+- D) To ensure IT maintains control over all business system changes
+
+**Answer: B**
+The primary security goal of change management is to **prevent security compromises** from unauthorized or inadequately tested changes. Changes — even well-intentioned ones — can introduce vulnerabilities, misconfiguration, or instability. The process (RFC → CAB → test → implement → rollback plan) ensures changes are authorized, tested, and reversible.
+
+---
+
+**Q24.** During a forensic investigation, an analyst uses a write blocker when imaging a suspect drive. Why is this device critical?
+
+- A) It speeds up the imaging process by caching read operations
+- B) It prevents the imaging tool from modifying any data on the suspect drive during collection
+- C) It encrypts the forensic image to protect it from tampering
+- D) It verifies the hash of the image after collection automatically
+
+**Answer: B**
+A **write blocker** is a hardware or software device that allows read operations while **physically or logically blocking any write operations** to the evidence drive. Without it, the forensic tool or OS could modify timestamps, access times, or data on the suspect drive — potentially making the evidence inadmissible.
+
+---
+
+**Q25.** Which job rotation principle is specifically designed to detect ongoing fraud that depends on a single person always being present to manage their scheme?
+
+- A) Mandatory vacations
+- B) Dual control
+- C) Separation of duties
+- D) Least privilege
+
+**Answer: A**
+**Mandatory vacations** force the fraudster away from their position, requiring someone else to cover their duties. This coverage often exposes ongoing fraud schemes that depended on the perpetrator being the only person handling certain transactions. Separation of duties prevents fraud from starting; mandatory vacations detect ongoing fraud after it has begun.
+
+---
+
+**Q26.** A security team has evidence that an attacker is exfiltrating HR records but has not yet been fully identified. Legal counsel advises that criminal prosecution is likely. What containment strategy is MOST appropriate?
+
+- A) Immediately isolate all affected systems to stop data loss
+- B) Monitor without touching to gather TTPs and evidence while minimizing further exposure
+- C) Shut down all compromised systems to preserve the chain of custody
+- D) Deploy a honeypot to redirect the attacker and protect production data
+
+**Answer: B**
+When **criminal prosecution is a priority**, covert monitoring ("monitor without touching") allows the team to gather evidence of the attacker's TTPs, identify all compromised systems, and build a complete evidentiary record. Immediate isolation stops exfiltration but may alert the attacker to destroy evidence or activate kill switches. The legal team's guidance toward prosecution shifts the balance toward evidence collection. Option D (honeypot) is the most controlled if feasible, but requires preparation.
+
+---
+
+**Q27.** An organization's tape backups are encrypted before transport. A third-party courier loses one of the tapes in transit. What is the security impact?
+
+- A) The organization has suffered a data breach and must notify regulators immediately
+- B) Minimal — the encrypted data cannot be read without the encryption key, which was not on the tape
+- C) The organization must immediately restore from a different backup set
+- D) All data on the lost tape is permanently compromised regardless of encryption
+
+**Answer: B**
+If tapes are properly **encrypted before transport** and the encryption keys are held separately (not stored on or with the tape), a lost tape represents a minimal security risk. The data is unreadable without the key. This is why NIST and regulations like HIPAA recognize encryption as a safe harbor — encrypted lost media does not necessarily trigger breach notification requirements.
+
+---
+
+**Q28.** The CFO sets the MTD for the financial close system at 1 hour. The IT team calculates that with current infrastructure, the minimum RTO achievable is 6 hours. What is the correct escalation path?
+
+- A) IT should accept the 6-hour RTO and update the MTD to match
+- B) IT should implement the best available solution and document the gap without escalation
+- C) IT must escalate to senior management with a cost/benefit analysis of options to meet the 1-hour MTD
+- D) The CISO should override the CFO's MTD and set a more realistic target
+
+**Answer: C**
+The **MTD is set by the business** (the CFO). IT cannot unilaterally change it. When IT cannot meet the business-defined MTD with current resources, the correct action is to **escalate to senior management** with options: (1) invest in infrastructure to meet the 1-hour MTD, (2) the CFO formally revises the MTD (accepting more risk), or (3) implement compensating controls. This is a management risk decision, not an IT decision.
+
+---
+
+**Q29.** Which MITRE ATT&CK tactic covers an adversary's actions after gaining initial access to a system but before their final objective — such as moving laterally to other systems?
+
+- A) Initial Access
+- B) Execution
+- C) Lateral Movement
+- D) Exfiltration
+
+**Answer: C**
+**Lateral Movement** (MITRE ATT&CK TA0008) covers techniques adversaries use to move through the network after initial compromise — pivoting from the beachhead to higher-value targets (domain controllers, databases, file shares). Understanding this tactic helps blue teams detect and segment east-west traffic to limit blast radius.
+
+---
+
+**Q30.** An insider is suspected of leaking confidential documents. The SOC wants to gather evidence of the exact documents accessed without alerting the employee. Which control provides the MOST targeted evidence?
+
+- A) Network DLP alerting on outbound file transfers
+- B) UEBA (User and Entity Behavior Analytics) establishing a baseline and flagging anomalous file access patterns
+- C) Full packet capture on the employee's network segment
+- D) A warrant served to the employee requiring them to disclose accessed files
+
+**Answer: B**
+**UEBA** passively establishes a behavioral baseline for the user and alerts on deviations — such as accessing a high volume of sensitive files, accessing files outside their normal work scope, or unusual hours. This provides targeted, covert evidence collection without alerting the subject. It is admissible and forensically sound when properly logged and maintained with chain of custody.

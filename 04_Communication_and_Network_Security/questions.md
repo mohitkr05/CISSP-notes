@@ -239,3 +239,123 @@ DMARC with policy `reject` instructs receiving mail servers to **reject** (not d
 
 **Answer: B**
 **SNMPv1 and SNMPv2** use community strings for authentication, which are transmitted in **plaintext**. An attacker who can intercept network traffic can capture the community string and use it to query or even modify device configurations. **SNMPv3** provides encryption and authentication.
+
+---
+
+**Q21.** A company deploys iSCSI to run block-level storage traffic over their existing IP network. A security engineer warns management that this decision introduces new risks. What is the PRIMARY inherited risk?
+
+- A) iSCSI is incompatible with existing firewall rules
+- B) iSCSI traffic inherits all TCP/IP vulnerabilities including sniffing and man-in-the-middle attacks
+- C) iSCSI requires dedicated hardware incompatible with standard switches
+- D) iSCSI cannot be encrypted and therefore cannot be secured
+
+**Answer: B**
+**iSCSI** encapsulates block-level storage commands inside TCP/IP packets. Because it runs over standard IP networks, it inherits all TCP/IP attack vectors: packet sniffing, ARP poisoning enabling MitM, and network-layer attacks that could expose or corrupt storage traffic. The mitigation is iSCSI over dedicated isolated VLANs with IPSec or MACsec encryption.
+
+---
+
+**Q22.** A security architect says "our SAN runs on FCoE — it's completely separate from our regular network." Why is this statement misleading from a CISSP perspective?
+
+- A) FCoE cannot be used for SAN storage
+- B) FCoE runs over standard Ethernet, so Layer 2 attacks (ARP poisoning, VLAN hopping) can affect it
+- C) FCoE uses a proprietary protocol that replaces Ethernet entirely
+- D) FCoE cannot be segmented using VLANs
+
+**Answer: B**
+**FCoE (Fibre Channel over Ethernet)** encapsulates Fibre Channel frames inside Ethernet frames. It runs on the same physical Ethernet infrastructure and is subject to the same Layer 2 attacks as any other Ethernet traffic. "Separate" only applies at the logical protocol level, not the physical or security threat level.
+
+---
+
+**Q23.** At which OSI layer does a standard Layer 2 switch primarily operate, and what is its security implication?
+
+- A) Layer 3 — can filter by IP address
+- B) Layer 2 — forwards based on MAC addresses; vulnerable to MAC flooding and ARP poisoning
+- C) Layer 4 — understands TCP sessions and can block ports
+- D) Layer 7 — inspects application content
+
+**Answer: B**
+Switches operate at **Layer 2 (Data Link)** and forward frames based on MAC addresses. Their security implication: they are vulnerable to MAC flooding (CAM table exhaustion) and ARP poisoning, both of which can turn a switch into a hub or redirect traffic to an attacker.
+
+---
+
+**Q24.** A VoIP implementation uses SIP for session control. Which security risk does this converged protocol introduce that a traditional PSTN phone system did not?
+
+- A) VoIP calls are always recorded by default
+- B) VoIP calls can be intercepted, spoofed, or subjected to DoS attacks over the IP network
+- C) VoIP is less reliable than PSTN due to packet loss
+- D) VoIP cannot be encrypted, making it inherently insecure
+
+**Answer: B**
+**VoIP** running over IP inherits IP-layer vulnerabilities: call interception (eavesdropping on RTP streams), caller ID spoofing, and DoS attacks (SIP flooding to exhaust call processing capacity). Traditional PSTN calls on circuit-switched networks did not face these IP-layer threats. Mitigation: SRTP (Secure RTP) for media encryption, TLS for SIP signaling.
+
+---
+
+**Q25.** What is the primary security advantage of EAP-TLS over PEAP for enterprise wireless authentication?
+
+- A) EAP-TLS is faster because it uses fewer round trips
+- B) EAP-TLS requires client certificates, providing mutual authentication and preventing rogue APs
+- C) EAP-TLS does not require a RADIUS server
+- D) EAP-TLS supports WPA3 while PEAP only supports WPA2
+
+**Answer: B**
+**EAP-TLS** requires both a server certificate AND a **client certificate**. This mutual authentication means that even if an attacker sets up a rogue AP with a valid server certificate, the client will not authenticate because the rogue AP cannot present a trusted client certificate. PEAP requires only a server certificate — a rogue AP with a valid or spoofed server cert can trick clients into connecting.
+
+---
+
+**Q26.** A network engineer proposes disabling split tunneling on the corporate VPN. What is the primary security benefit of this change?
+
+- A) It reduces the amount of bandwidth consumed by the VPN tunnel
+- B) All user traffic is routed through corporate security controls (proxy, DLP, firewall) regardless of destination
+- C) It eliminates the risk of credential theft during VPN authentication
+- D) It prevents users from connecting to the VPN from untrusted locations
+
+**Answer: B**
+Disabling split tunneling means **all traffic** (internet and corporate) flows through the corporate VPN and is inspected by corporate security controls. This prevents malware on a user's device from directly reaching the internet while also connected to corporate resources, and ensures corporate DLP/proxy rules apply to all activity.
+
+---
+
+**Q27.** An organization implements DMARC but leaves the policy set to "p=none." What does this mean?
+
+- A) All emails that fail SPF and DKIM checks are rejected
+- B) All emails that fail SPF and DKIM checks are quarantined
+- C) DMARC monitoring is active but no enforcement action is taken — failed emails are still delivered
+- D) DMARC is disabled and has no effect on email delivery
+
+**Answer: C**
+**p=none** is "monitor-only" mode — DMARC collects data about SPF/DKIM failures and sends reports to the domain owner, but takes **no enforcement action**. Failed emails are still delivered. Organizations typically start with p=none to gather visibility, then progress to p=quarantine and finally p=reject. Without enforcement, DMARC provides no actual protection.
+
+---
+
+**Q28.** Which BGP security mechanism cryptographically validates that a network prefix announcement originates from an authorized Autonomous System?
+
+- A) DNSSEC
+- B) BGP communities
+- C) RPKI (Resource Public Key Infrastructure)
+- D) BCP38 ingress filtering
+
+**Answer: C**
+**RPKI (Resource Public Key Infrastructure)** uses cryptographically signed Route Origin Authorizations (ROAs) to validate that a BGP prefix announcement is made by the legitimate AS that owns that IP space. It prevents BGP hijacking attacks where attackers announce more-specific routes to redirect internet traffic.
+
+---
+
+**Q29.** An organization wants the strongest possible enterprise wireless security. Which combination represents the current best practice?
+
+- A) WPA2-Personal with AES-CCMP and a long PSK
+- B) WPA2-Enterprise with 802.1X and PEAP-MSCHAPv2
+- C) WPA3-Enterprise with 802.1X and EAP-TLS
+- D) WPA3-Personal with SAE and certificate pinning
+
+**Answer: C**
+**WPA3-Enterprise with 802.1X and EAP-TLS** represents the strongest available wireless security: WPA3-Enterprise uses 192-bit security mode with AES-256-GCMP, combined with EAP-TLS for mutual certificate-based authentication. This combination resists all known offline attacks and provides the strongest identity assurance.
+
+---
+
+**Q30.** A firewall rule states "DENY ALL" at the bottom of the ruleset with no explicit permit rule for a specific traffic type. A packet matching no prior rules arrives. What happens?
+
+- A) The packet is forwarded to the next firewall in the chain
+- B) The packet is logged and sent to the security team for review
+- C) The packet is dropped — implicit deny applies
+- D) The packet is allowed by default until a deny rule is added
+
+**Answer: C**
+**Implicit deny (default deny)** is a fundamental firewall principle: any traffic not explicitly permitted by a rule is denied. This is the security-correct default. A "DENY ALL" at the bottom makes this explicit, but even without it, most security-focused firewalls apply implicit deny as their default action for unmatched traffic.

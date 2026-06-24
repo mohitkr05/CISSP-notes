@@ -239,3 +239,123 @@ The **right to erasure** ("right to be forgotten") under GDPR Article 17 allows 
 
 **Answer: D**
 Cardholder data is the most sensitive commercial classification — **Confidential or Proprietary**. PCI-DSS requirements (encryption at rest, strict access controls, audit logging) align with the highest commercial classification tier.
+
+---
+
+**Q21.** In 2026 AI security guidance, which two asset types are now considered high-value, protectable assets in machine learning systems?
+
+- A) Model APIs and inference endpoints
+- B) Training data and model weights
+- C) GPU hardware and inference servers
+- D) Prompt templates and API keys
+
+**Answer: B**
+Emerging AI security frameworks identify **training data** (the dataset used to build the model) and **model weights** (the learned parameters) as high-value intellectual property assets requiring the same classification, access control, and protection as traditional trade secrets. Compromise of either can enable model theft or adversarial attacks.
+
+---
+
+**Q22.** Which privacy-preserving technique adds mathematical noise to training data or query outputs to prevent an AI model from leaking individual records through inference attacks?
+
+- A) Tokenization
+- B) Federated learning
+- C) Differential privacy
+- D) Homomorphic encryption
+
+**Answer: C**
+**Differential privacy** adds carefully calibrated statistical noise to datasets or model outputs, making it mathematically infeasible to determine whether any individual's data was included in the training set. It is the primary technical mitigation for membership inference attacks against AI models.
+
+---
+
+**Q23.** An organization identifies access violations where users are reading files they should not be able to access. What is the FIRST step a manager should take?
+
+- A) Implement additional access control lists on all file shares
+- B) Deploy a DLP system to monitor file access
+- C) Review and update the data access policy
+- D) Revoke all user permissions and rebuild them from scratch
+
+**Answer: C**
+The CISSP managerial answer is to first **review and update the policy**. Technical controls implement policy — if the policy is incomplete, ambiguous, or outdated, new technical controls will enforce the wrong thing. Policy must be correct before technical enforcement is refined.
+
+---
+
+**Q24.** What is the log retention requirement under HIPAA for security documentation?
+
+- A) 1 year
+- B) 3 years
+- C) 6 years
+- D) 10 years
+
+**Answer: C**
+**HIPAA** requires that security documentation (including audit logs, risk assessments, and policies) be retained for a minimum of **6 years** from the date of creation or the date it was last in effect. This is a common exam detail distinguishing HIPAA from PCI-DSS (1 year minimum for logs).
+
+---
+
+**Q25.** A company's asset is worth $200,000. A vulnerability causes 50% damage when exploited. The event occurs twice per year. What is the ALE?
+
+- A) $100,000
+- B) $200,000
+- C) $50,000
+- D) $400,000
+
+**Answer: B**
+SLE = $200,000 × 0.50 = $100,000. ARO = 2. ALE = $100,000 × 2 = **$200,000**. The asset loses its full value each year across two incidents.
+
+---
+
+**Q26.** An employee in the data science team is given access to a production customer database for model training without a business justification review. Which concept does this violate?
+
+- A) Data minimization
+- B) Need to know
+- C) Least privilege
+- D) Both B and C
+
+**Answer: D**
+This violates both **need to know** (no demonstrated business need for the specific data) and **least privilege** (access exceeds what is required for the role). Both apply simultaneously — need to know restricts which data is accessible; least privilege restricts the scope of system rights granted.
+
+---
+
+**Q27.** Under GDPR, what is the maximum fine for the most serious violations (e.g., processing data in violation of core principles or without a legal basis)?
+
+- A) €10 million or 2% of global annual turnover
+- B) €20 million or 4% of global annual turnover
+- C) €35 million or 7% of global annual turnover
+- D) Unlimited, at the discretion of the supervisory authority
+
+**Answer: B**
+The highest GDPR fine tier is **€20 million or 4% of global annual turnover** (whichever is higher) for the most serious violations including processing without a legal basis, violating data subjects' rights, and international transfer violations. The lower tier (€10M / 2%) applies to technical requirement violations.
+
+---
+
+**Q28.** A data steward notices that two departments are using different formats and definitions for the same customer ID field, causing reporting inconsistencies. Which role is responsible for addressing this issue?
+
+- A) Data owner
+- B) Data custodian
+- C) Data steward
+- D) Data controller
+
+**Answer: C**
+The **data steward** is responsible for data quality, governance, metadata management, and ensuring consistent data definitions across the organization. Resolving field-level inconsistencies like this is squarely in the steward's mandate — not the owner's (classification) or custodian's (technical implementation).
+
+---
+
+**Q29.** An organization wants to allow researchers to analyze patient data without exposing individual identities. The analysis results must never allow re-identification of any specific patient. Which technique BEST achieves this?
+
+- A) Pseudonymization
+- B) Tokenization
+- C) Anonymization
+- D) Encryption
+
+**Answer: C**
+True **anonymization** irreversibly removes all identity linkage — no mapping table exists and re-identification is mathematically infeasible. GDPR no longer applies to truly anonymized data. Pseudonymization still carries re-identification risk (the mapping table exists) and remains personal data under GDPR.
+
+---
+
+**Q30.** A company's backup tapes are stored in a fireproof safe located in the same building as the primary data center. Which backup principle does this violate?
+
+- A) The 3-2-1 rule's requirement for two different media types
+- B) The 3-2-1 rule's requirement for one copy stored offsite
+- C) NIST SP 800-88 sanitization requirements
+- D) The data retention policy's minimum retention period
+
+**Answer: B**
+The **3-2-1 rule** requires 1 copy stored **offsite** (a geographically separate location). Tapes in the same building as the primary data center are vulnerable to the same disaster (fire, flood, earthquake). "Fireproof safe" does not substitute for physical geographic separation.

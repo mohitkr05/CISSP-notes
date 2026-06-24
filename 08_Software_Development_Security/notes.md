@@ -22,6 +22,9 @@ Embedding security activities earlier (left) in the SDLC rather than bolting on 
 - Requirement defect found in design: ~10x cost to fix
 - Requirement defect found in production: ~100x cost to fix
 
+> **Critical CISSP Rule — Security Placement in SDLC:**
+> Security MUST be implemented starting in the **Initiation/Requirements phase** of the SDLC. If security is "bolted on" after development is complete, it becomes a non-functional requirement that is easily deprioritized, deferred, or cut entirely when budget or time is constrained. The rule: security requirements must be defined **before a single line of code is written**, not discovered at a pen test one week before launch.
+
 > **Scenario — Why "Shift Left" Saves Money:**
 > A development team builds a healthcare portal over 6 months. They do no security testing during development and run a penetration test one week before launch. The pentest finds:
 > - All API endpoints lack authentication (architectural design flaw)
@@ -230,9 +233,16 @@ Using `../` sequences to navigate outside intended directory and access files.
 ## 8.5 Database Security
 
 ### Polyinstantiation
-A database security technique where multiple records for the same key exist at different classification levels. Subjects only see data at or below their clearance — prevents inference attacks in multilevel security databases.
+A database security technique where **two or more different versions of the same data** (same primary key) exist at **different classification levels**. Subjects only see data at or below their clearance — prevents **inference attacks** and maintains **integrity** in multilevel security (MLS) databases.
 
-**Example:** A "SALARY" field in an employee record might show $50,000 to SECRET-cleared users but $0 (fake/null) to UNCLASSIFIED users.
+**Example:** A "SALARY" field in an employee record might show $50,000 to SECRET-cleared users but $0 (fake/null) to UNCLASSIFIED users. The lower-level user sees a plausible but sanitized record — they can't detect that a higher-classification record exists for the same primary key.
+
+> **Why Polyinstantiation Prevents Inference:**
+> Without it: an UNCLASSIFIED user queries "Colonel Smith's salary" and gets "Record not found." The error itself reveals that Colonel Smith's record exists at a higher classification — an inference attack.
+>
+> With polyinstantiation: a fake record exists at UNCLASSIFIED level showing salary = $0 (a sanitized decoy). The user sees a record and learns nothing about the real data. Two instances of the same primary key exist — one per classification level.
+>
+> **The CISSP key:** Polyinstantiation creates two different versions of the same data to prevent inference attacks and maintain integrity across classification levels. This is a MLS database control, not a general-purpose technique.
 
 > **Scenario — Polyinstantiation Preventing Inference:**
 > Without polyinstantiation: An UNCLASSIFIED user queries the personnel database for "Colonel Smith's salary" and gets an error: "Record not found." The error itself reveals information — Colonel Smith exists in the database at a higher classification level. This is an inference attack.

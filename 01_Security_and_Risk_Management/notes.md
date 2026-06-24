@@ -43,10 +43,15 @@ The three core pillars of information security:
 | **Data User** | Accesses data per policy |
 
 ### Due Care vs. Due Diligence
-- **Due Care** — doing what a reasonable person would do; ongoing action ("doing the right thing")
-- **Due Diligence** — researching and understanding risks before acting ("knowing the right thing")
+
+| Term | Definition | Simple Mnemonic |
+| :--- | :--- | :--- |
+| **Due Diligence** | The **research, planning, and evaluation** performed *before* a decision | "Do your homework." |
+| **Due Care** | The **implementation and upkeep** of controls; acting as a "prudent person" would | "Do the right thing." |
 
 > **Mnemonic:** Due **C**are = **C**ontinuous action. Due **D**iligence = **D**iscovery/research first.
+
+> **Cross-Domain Correlation Reminder:** Never view CISSP domains in silos. A decision in Domain 1 (Policy) dictates actions in Domain 5 (Access Control) and Domain 7 (Incident Response). Always think about how governance at the top ripples down to technical controls.
 
 > **Scenario — Due Care vs. Due Diligence:**
 > A company is evaluating a new cloud vendor. **Due diligence** = reviewing the vendor's SOC 2 report, checking their breach history, and assessing their security policies *before* signing the contract. **Due care** = after signing, continuously monitoring the vendor, running quarterly reviews, and ensuring SLAs are met. If the vendor has a breach and you never reviewed their controls, you failed due diligence. If you reviewed but never followed up, you failed due care.
@@ -57,9 +62,24 @@ The three core pillars of information security:
 ```
 Policies (mandatory, high-level)
   └─ Standards (mandatory, specific metrics)
-       └─ Guidelines (recommended, flexible)
+       └─ Baselines (minimum security requirements)
             └─ Procedures (step-by-step instructions)
+                 └─ Guidelines (optional recommendations/best practices)
 ```
+
+> **Policy Hierarchy Reminder (exam-critical):**
+> 1. **Policy** — high-level, mandatory; defines "What" and "Why"
+> 2. **Standards** — mandatory hardware/software configurations and minimums
+> 3. **Baselines** — minimum security requirements for specific systems
+> 4. **Procedures** — step-by-step "How-to" instructions
+> 5. **Guidelines** — **optional** recommendations and best practices (the only non-mandatory tier)
+
+> **Managerial Mindset Reminder:** The CISSP exam requires a shift from a technical "fix-it" mindset to a **managerial "risk advisor" perspective**. Think of yourself as a **hired consultant on a Zoom call** — you advise management on risk; you don't touch equipment. Always prioritize **human safety** above all else, then business survival.
+>
+> **The "Ask Why" Rule:** When faced with a technical control, ask "Why?" until you reach a business justification. A firewall protects the network → network holds data → data has value → value supports **business objectives and reputation**. Every technical decision must trace back to a business reason.
+
+> **Real-World Scenario — FujiFilm Ransomware:**
+> FujiFilm was hit with a ransomware attack but **refused to pay** the ransom because they had **tested backups** aligned with **corporate policy**. This is a perfect example of how technical procedures (tested, reliable backups) must always support high-level governance (corporate policy on not paying ransoms). The technical solution only worked because it was built to support the business decision — policy first, then technical implementation.
 
 ### Governance Frameworks
 
@@ -475,6 +495,42 @@ Recovery should be in order of business criticality:
 | **COOP (Continuity of Operations)** | Government — maintain essential functions |
 | **Crisis Management Plan** | Human safety and communications during disaster |
 | **DRP** | IT/technology recovery |
+
+---
+
+## 1.12 Cross-Domain Security Concepts Reference Table
+
+This table maps key security concepts across goal, responsible role, implementation phase, countermeasures, and risk impact — use it to connect policy-level thinking to operational details.
+
+| Security Concept | Goal/Objective | Role Responsible | Phase of Implementation | Common Countermeasures | Inferred Risk Impact |
+|:---|:---|:---|:---|:---|:---|
+| **Confidentiality** | Prevent unauthorized disclosure | Data Owner, Custodian | Asset Security / Data Lifecycle | Encryption (AES-256, IPSec, TLS, PGP), masking, steganography, strict access control, data classification, training | Regulatory fines (GDPR 4% turnover), IP theft, legal liability |
+| **Integrity** | Protect reliability/correctness of data | Data Owner, Custodian | Asset Security / Data Lifecycle | Hashing (MD5, SHA-2), digital signatures, IDS, configuration management, change control | Errors in critical systems, loss of trust in financial/medical reporting, regulatory non-compliance |
+| **Availability** | Ensure authorized timely access | Asset Owner, Custodian, IT Staff | BCP / DRP / Operations | Redundancy, RAID, failover, load balancing, UPS/generators, HVAC, backups | Revenue loss, loss of life (medical systems), SLA breach |
+| **Business Continuity (BCP)** | Survive and continue critical operations during disaster | Senior Management, BCP Team | BCP Lifecycle (Scope, Planning, BIA) | BIA, COOP, recovery strategies, call trees, alternate sites (Hot/Warm/Cold) | Total organizational collapse, financial ruin if downtime exceeds MTD |
+| **Least Privilege** | Grant only minimum necessary access | Administrator, Data Owner | IAM / Operations | RBAC, ABAC, MAC, restricted interfaces, periodic access reviews | Insider threat damage, lateral movement, accidental mass deletion |
+| **Separation of Duties** | Prevent fraud via split control | Senior Mgmt, Security Mgr, Admin | Security Operations / HR | Two-person control, split knowledge, job rotation, mandatory vacations | Internal fraud, embezzlement, undetected unauthorized changes |
+| **Due Care** | Do the right thing (Prudent Person standard) | Senior Management, Professionals | Strategic Planning / Implementation | Security policies, background checks, employee safety, security controls | Legal liability, negligence charges, regulatory penalties |
+| **Due Diligence** | Research and verify that due care is maintained | Senior Management, Auditor | Governance / Risk Assessment | Audits, vulnerability scans, penetration testing, third-party reviews | Regulatory fines, undiscovered vulnerabilities, inability to prove compliance |
+| **Secure SDLC** | Reduce software vulnerabilities at every phase | Project Manager, Developers, Architect | SDLC (all phases) | Threat modeling, input validation, Fagan inspections, fuzzing, SAST/DAST, code signing | Exploited vulnerabilities (buffer overflows, SQLi), breaches, high remediation cost |
+| **Non-repudiation** | Ensure subjects cannot deny actions | Data Owner, Security Professional, Auditor | Cryptography / PKI / Operations | Digital signatures, digital certificates, transaction logs, session IDs | Legal inability to prosecute attackers, contractual disputes, no accountability |
+| **IP Protection** | Protect innovations and original works | Data Owner, Senior Mgmt, Legal | Acquisition / Administrative | Patents, Trademarks, Copyrights, Trade secrets, NDAs | Loss of competitive advantage, trade secret theft, financial loss |
+| **Data Retention** | Retain data as long as needed; secure destruction after | Data Owner, Legal Counsel | Data Lifecycle | Automated deletion, offsite storage, formal retention policies | Increased legal discovery costs, regulatory non-compliance (GDPR) |
+| **Change Management** | Prevent outages or security weakening from changes | CAB, Administrators | SDLC / Security Operations | Formal RFCs, testing in non-prod, rollback plans, CAB review | Unplanned outages, introduced vulnerabilities, loss of configuration control |
+| **DRP** | Recover IT infrastructure after disaster | IT Function, Technical Staff | BCP/DRP Phase 2 (Recovery) | Hot sites, backup servers, remote journaling, electronic vaulting | Prolonged downtime, data loss, SLA breach |
+| **Personnel Security** | Reduce fraud, sabotage, misuse by employees | HR, Hiring Manager | Hiring and Termination | Background checks, NDAs, mandatory vacations, job rotation | Internal fraud, IP theft by departing employees, wrongful termination liability |
+| **Risk Management** | Identify, assess, reduce risk to acceptable level | Senior Management | Ongoing / Continuous | Risk framing, controls (admin/technical/physical), insurance (transfer) | Inefficient resource use, failure to survive disasters, executive legal liability |
+| **Accountability** | Ultimate answerability for business functions | Asset Owner, Data Owner | Governance / Lifecycle | Governance policies, reporting lines, audits | Legal liability, negligence charges, lack of organizational direction |
+| **Media Sanitization** | Prevent data remanence on disposal | Data Custodian | Disposal (SDLC) | Clearing, purging, degaussing, physical destruction | Confidentiality breach, regulatory non-compliance, data theft |
+| **Supply Chain Risk Mgmt (SCRM)** | Ensure vendor/supply chain reliability | Data Owner, Procurement Officer | Contracting / Procurement | Silicon root of trust, SBOM, PUFs, third-party audits | Hardware/software implants, counterfeits, supply chain poisoning |
+| **Human Safety** | Preserve life over all other assets | Senior Management | Physical Security / Emergency Response | Fail-safe locks, fire suppression, emergency lighting, evacuation plans | Loss of life, criminal prosecution of executives, irreparable reputational damage |
+| **Asset Classification** | Identify asset value for appropriate protection | Data Owner | Asset Security (Domain 2) | Labeling, marking, metadata tagging, classification policies | Overspending on low-value data or under-protecting critical secrets |
+| **Information Security Governance** | Strategic direction ensuring objectives achieved | Board and Executive Mgmt | Governance / Planning | Policies, standards, frameworks | Strategic failure, organizational misalignment |
+| **Information Security Policy** | Mandatory executive-approved direction | Senior Management, CISO | Planning / Governance | Policy development, annual reviews, directive wording | Lack of management support, no legal/operational direction |
+| **Risk Analysis (Quantitative)** | Predict monetary losses; balance risk vs. safeguard costs | CISO, Risk Manager | BIA / Risk Assessment | ALE = SLE × ARO, cost/benefit analysis, asset valuation | Inaccurate financial forecasting, inefficient resource allocation |
+| **Data Ownership** | Classify data and approve recovery objectives | Data Owner | Asset Security / BIA | Information classification policies | Data integrity loss, misaligned recovery priorities |
+| **Continuous Monitoring** | Identify risks and assess control effectiveness | System Admin, Auditor | Operations / Maintenance | SIEM, log analysis, NTP synchronization | Delayed breach detection, increased exfiltration damage |
+| **Privacy Compliance** | Protect PII/PHI and ensure lawful processing | DPO (Data Protection Officer) | Administrative / Legal | Technical measures, breach notification, parental consent (COPPA) | GDPR fines, reputational damage, legal prosecution |
 
 ---
 

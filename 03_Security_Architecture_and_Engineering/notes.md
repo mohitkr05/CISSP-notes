@@ -43,6 +43,15 @@
 
 Security models formalize security policies mathematically.
 
+### Security Models Quick Comparison
+
+| Model | Primary Focus | Key Mechanism |
+| :--- | :--- | :--- |
+| **Bell-LaPadula** | **Confidentiality** | No Read-Up / No Write-Down |
+| **Biba** | **Integrity** | No Read-Down / No Write-Up |
+| **Clark-Wilson** | **Integrity** for commercial use | **Access Triple** (Subject/Program/Object) & Separation of Duties |
+| **Brewer-Nash** | Conflicts of Interest | **Chinese Wall** — access changes based on past activity |
+
 ### Bell-LaPadula Model (Confidentiality)
 Created for the US military. Focus: **prevent unauthorized disclosure**.
 
@@ -165,8 +174,10 @@ Prevents **conflicts of interest**. A user who has accessed information from one
 | EAL6 | Semiformally verified design and tested |
 | EAL7 | Formally verified design and tested |
 
-**PP (Protection Profile)** — defines security requirements for a product class.
-**ST (Security Target)** — vendor's specific security claims for their product.
+**PP (Protection Profile)** — defines security requirements for a product class (what the **customer** wants).
+**ST (Security Target)** — vendor's specific security claims for their product (what the **vendor** provides).
+
+> **PP vs. ST Memory Hook:** PP = "Product Profile" = customer's wish list (requirements). ST = "Supplier's Target" = vendor's promise (what they deliver). Think of PP as the job description and ST as the resume.
 
 ---
 

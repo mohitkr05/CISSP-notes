@@ -241,3 +241,123 @@ The **Spiral model** is risk-driven and iterative. Each spiral iteration include
 
 **Answer: B**
 `eval()` and `exec()` execute arbitrary code. If user input is passed to these functions without sanitization, an attacker can inject and execute **arbitrary code on the server** — a critical Remote Code Execution (RCE) / Command Injection vulnerability. Never pass user input to dynamic execution functions.
+
+---
+
+**Q21.** In which SDLC phase must security requirements be identified to achieve the most cost-effective security outcome?
+
+- A) Testing phase — to catch issues before deployment
+- B) Design phase — to integrate security into the architecture
+- C) Initiation/Requirements phase — before any code is written
+- D) Maintenance phase — through continuous monitoring and patching
+
+**Answer: C**
+Security must be addressed in the **Initiation/Requirements phase** — before design begins. The "1-10-100 rule" applies: a defect found in requirements costs $1 to fix; in design $10; in testing $100; in production $1,000+. Security "bolted on" after development is typically deprioritized, misimplemented, or skipped for budget reasons.
+
+---
+
+**Q22.** A multilevel security database needs to prevent an UNCLASSIFIED user from detecting that a SECRET-level record exists for the same primary key. Which technique achieves this?
+
+- A) Data masking — replace sensitive values with realistic fake data
+- B) Polyinstantiation — create a separate record at the UNCLASSIFIED level with sanitized values
+- C) Cell suppression — return no result for any query involving the sensitive key
+- D) View-based access control — create database views that exclude sensitive rows
+
+**Answer: B**
+**Polyinstantiation** creates multiple versions of the same record at different classification levels. The UNCLASSIFIED user sees a "real" record with sanitized/false values — they have no way to detect that a SECRET version exists. Cell suppression ("no result") would itself reveal that something is hidden. Views don't prevent inference if the user can detect "no record found" vs. a returned record.
+
+---
+
+**Q23.** Which ACID property ensures that if a database transaction partially fails (e.g., a debit succeeds but the corresponding credit fails), the entire transaction is rolled back?
+
+- A) Consistency
+- B) Isolation
+- C) Durability
+- D) Atomicity
+
+**Answer: D**
+**Atomicity** ensures that a transaction is treated as a single, indivisible unit — all operations succeed or all are rolled back. A partial failure (debit without credit) would violate financial integrity. This is why banking systems insist on atomic transactions: money cannot disappear between accounts.
+
+---
+
+**Q24.** An autonomous AI agent is given the capability to send emails on behalf of a user. Without any constraint, it composes and sends 500 emails in 60 seconds. Which security control would have prevented this?
+
+- A) Network egress filtering blocking port 25
+- B) Input validation on the email subject field
+- C) Rate limiting and human-in-the-loop approval for bulk actions
+- D) Encryption of outbound email traffic
+
+**Answer: C**
+**Rate limiting** (preventing more than N actions per time period) and **human-in-the-loop controls** (requiring human approval before bulk or irreversible actions) are the appropriate AI agent safety controls. Unconstrained autonomous action is a 2026 AI governance risk — agents must be bounded by configurable rate limits and approval gates for high-impact operations.
+
+---
+
+**Q25.** A developer reviews a peer's code and finds that REST API endpoints return full user objects including fields the requesting user should not see (e.g., salary, SSN, internal IDs). Which OWASP Top 10 category does this represent?
+
+- A) A01: Broken Access Control
+- B) A02: Cryptographic Failures
+- C) A03: Injection
+- D) A09: Security Logging and Monitoring Failures
+
+**Answer: A**
+**A01: Broken Access Control** covers cases where the application fails to properly restrict what data is exposed. Returning excessive fields (fields the user is not authorized to see) is **excessive data exposure** — a subcategory of broken access control. The fix: APIs should return only the minimum fields the requestor is authorized to receive (field-level authorization enforcement).
+
+---
+
+**Q26.** An organization's application has a stored secret (database password) in its configuration file committed to a public GitHub repository. Which DevSecOps control should have prevented this?
+
+- A) DAST scanning at the testing phase
+- B) Pre-commit secrets scanning (e.g., GitLeaks) at the commit stage
+- C) Container image scanning at the package stage
+- D) SAST static analysis at the build stage
+
+**Answer: B**
+**Pre-commit secrets scanning** (tools like GitLeaks, truffleHog, detect-secrets) runs as a Git hook before the commit is finalized — it prevents secrets from entering the repository in the first place. Once a secret is in version control history, it may be cached externally and is considered compromised even if removed from the current branch. Prevention at the commit boundary is the only guaranteed defense.
+
+---
+
+**Q27.** What is Black Box testing in the context of software security testing?
+
+- A) Testing conducted in a physically isolated environment
+- B) Testing performed without knowledge of the internal code or architecture
+- C) Testing that focuses exclusively on the database layer
+- D) Testing conducted by the development team using their own code access
+
+**Answer: B**
+**Black box testing** is performed without knowledge of the internal code, architecture, or implementation. The tester only interacts with the application's external interfaces — simulating an external attacker's perspective. DAST is an automated form of black box testing. Contrast with white box (full source code access) and gray box (partial access).
+
+---
+
+**Q28.** A security reviewer notes that a stored procedure in the application calls another stored procedure using a dynamically constructed SQL string inside it. Is this safe from SQL injection?
+
+- A) Yes — stored procedures are always safe from SQL injection by definition
+- B) No — stored procedures that build SQL dynamically with string concatenation are still vulnerable
+- C) Yes — the database will sanitize dynamic SQL within stored procedures
+- D) Only if the stored procedure uses an ORM framework internally
+
+**Answer: B**
+**Stored procedures are NOT inherently SQL injection-safe**. A stored procedure that builds SQL dynamically using string concatenation (`SET @sql = 'SELECT * FROM users WHERE id = ' + @input; EXEC(@sql)`) has the exact same vulnerability as application-layer string concatenation. Only parameterized stored procedures (using parameter binding, not string building) are safe.
+
+---
+
+**Q29.** The PASTA threat modeling methodology differs from STRIDE primarily because:
+
+- A) PASTA is used for physical security threat modeling; STRIDE is for software only
+- B) PASTA is a 7-stage risk-centric process that quantifies business risk; STRIDE categorizes threat types
+- C) PASTA is simpler and requires fewer stages than STRIDE
+- D) PASTA was developed by Microsoft; STRIDE by the DoD
+
+**Answer: B**
+**PASTA (Process for Attack Simulation and Threat Analysis)** is a 7-stage, risk-centric methodology that aligns threat modeling with business objectives and quantifies risk impact. **STRIDE** (Microsoft) is a simpler, category-based framework that maps six threat types (Spoofing, Tampering, etc.) to security properties. STRIDE is the go-to for CISSP exams; PASTA is used in enterprise risk-aligned development programs.
+
+---
+
+**Q30.** An organization's vendor goes bankrupt and the software they rely on is no longer maintained. The organization needs access to the source code to continue patching. Which contractual arrangement would have protected them?
+
+- A) SLA (Service Level Agreement) requiring 99.9% uptime
+- B) Right-to-audit clause allowing inspection of vendor source code
+- C) Software escrow agreement where source code is held by a neutral third party
+- D) Non-disclosure agreement preventing the vendor from sharing the code with competitors
+
+**Answer: C**
+**Software escrow** is a contractual arrangement where the software's source code is deposited with a neutral third-party escrow agent. The escrow agent releases the code to the licensee if defined trigger conditions occur — such as vendor bankruptcy, acquisition, or failure to maintain the software. This protects organizations from being unable to maintain critical software if the vendor disappears.

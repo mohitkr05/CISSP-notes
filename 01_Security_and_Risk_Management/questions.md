@@ -239,3 +239,123 @@ When management formally acknowledges and accepts a risk — especially the **re
 
 **Answer: B**
 The **BIA** identifies critical business functions, analyzes the impact of their disruption (financial, reputational, regulatory), and defines recovery objectives (RTO, RPO, MTD). It is the foundation for all continuity and recovery planning.
+
+---
+
+**Q21.** A CISSP exam candidate reads a question describing a failing network system. The "obvious" answer is to patch the firewall. Which mindset should guide the correct answer selection?
+
+- A) Choose the fastest technical fix to stop the problem
+- B) Apply a managerial "risk advisor" perspective — consider the business impact and risk before any technical action
+- C) Select the most technically complex solution since it offers the best protection
+- D) Always choose the answer that involves the most controls
+
+**Answer: B**
+The CISSP exam requires a **managerial mindset**. Think like a consultant advising management — not a technician touching equipment. The correct answer addresses the business risk first, then supports it with an appropriate governance or policy action. Technical fixes without business justification are traps.
+
+---
+
+**Q22.** The policy hierarchy lists five levels of documentation. Which level is the ONLY optional one?
+
+- A) Policy
+- B) Standards
+- C) Baselines
+- D) Guidelines
+
+**Answer: D**
+**Guidelines** are optional — they are recommendations and best practices that provide flexibility. Policies, Standards, Baselines, and Procedures are all mandatory. Guidelines advise; they do not mandate.
+
+---
+
+**Q23.** Which EU regulation carries extraterritorial reach, affecting global companies whose AI system outputs are consumed by users in the EU?
+
+- A) GDPR
+- B) EU AI Act
+- C) NIS2 Directive
+- D) EU Cybersecurity Act
+
+**Answer: B**
+The **EU AI Act** has extraterritorial reach — any organization whose AI systems are used in the EU must comply, regardless of where the provider is headquartered. High-risk AI systems face the strictest requirements, including continuous risk management and human oversight mandates.
+
+---
+
+**Q24.** What are the four core iterative functions of the NIST AI Risk Management Framework (AI RMF 1.0)?
+
+- A) Identify, Protect, Detect, Respond
+- B) Govern, Map, Measure, Manage
+- C) Assess, Authorize, Monitor, Categorize
+- D) Plan, Do, Check, Act
+
+**Answer: B**
+The **NIST AI RMF 1.0** organizes AI risk management into four iterative functions: **Govern, Map, Measure, and Manage**. These replace the traditional NIST CSF functions for AI-specific risk contexts, emphasizing trustworthiness and bias/harm assessment alongside security.
+
+---
+
+**Q25.** As of April 1, 2026, which certifications were removed from the CISSP one-year experience waiver eligibility list?
+
+- A) CISM and CISA
+- B) CEH, CISA, CRISC, and OSCP
+- C) CISSP-ISSAP and CISSP-ISSEP
+- D) CompTIA Security+ and CySA+
+
+**Answer: B**
+Effective **April 1, 2026**, ISC2 removed **CEH, CISA, CRISC, and OSCP** from the approved waiver certification list. Candidates holding these credentials no longer receive the one-year experience waiver. Only one waiver (degree or approved cert) is permitted; combining them for two years is not allowed.
+
+---
+
+**Q26.** Which (ISC)² Code of Ethics canon is violated when a professional fails to provide diligent and competent service to their employer?
+
+- A) Canon 1 — Protect society
+- B) Canon 2 — Act honorably
+- C) Canon 3 — Provide diligent service to principals
+- D) Canon 4 — Advance the profession
+
+**Answer: C**
+**Canon 3** requires providing "diligent and competent service to principals" (employers, clients). However, Canon 3 is outranked by Canon 1 (society) and Canon 2 (honesty/legality) if conflicts arise. The canons are listed in priority order.
+
+---
+
+**Q27.** The CISSP CAT exam terminates when the testing engine reaches what confidence level that a candidate has passed or failed?
+
+- A) 80%
+- B) 90%
+- C) 95%
+- D) 99%
+
+**Answer: C**
+The CISSP CAT (Computerized Adaptive Testing) engine terminates — at a minimum of 125 questions, up to 175 — when it reaches **95% statistical confidence** that the candidate's ability is definitively above or below the passing standard. More questions are presented only when the engine needs more data.
+
+---
+
+**Q28.** A company pays $35M in fines after deploying a high-risk AI hiring system that was found non-compliant with the EU AI Act. Which fine tier does this represent?
+
+- A) The maximum fine for prohibited AI practices
+- B) The maximum fine for high-risk AI system violations (€35M or 7% of turnover)
+- C) The standard fine for minor non-conformities (€15M or 3%)
+- D) An administrative sanction, not a regulatory fine
+
+**Answer: B**
+Under the **EU AI Act**, violations related to **high-risk AI systems** (Article 10–15 non-compliance) can attract fines up to **€35 million or 7% of global annual turnover**, whichever is higher. The maximum for prohibited practices (Article 5) is even higher at €35M or 7%. The $35M aligns with the 7% tier.
+
+---
+
+**Q29.** In the quantitative risk formula, what does a Safeguard Value of −$5,000 tell a security manager?
+
+- A) The safeguard eliminates $5,000 of risk annually
+- B) The safeguard costs more than the risk it prevents — do not implement it
+- C) The safeguard reduces ALE by $5,000 annually
+- D) The safeguard requires a $5,000 annual investment
+
+**Answer: B**
+Safeguard Value = ALE(before) − ALE(after) − Annual Cost. A **negative Safeguard Value** means the control costs more than the risk reduction it provides — it is not cost-justified. Management should reject or seek a less expensive alternative.
+
+---
+
+**Q30.** The FujiFilm ransomware case demonstrates which fundamental CISSP principle?
+
+- A) Technical controls are sufficient if implemented correctly
+- B) Paying ransoms is never a viable recovery option
+- C) Technical recovery procedures (tested backups) must be aligned with and supported by corporate governance policy
+- D) Ransomware always results in data loss regardless of backup strategy
+
+**Answer: C**
+FujiFilm refused to pay because their **tested backups** aligned with **corporate policy** (no ransom payments). The lesson: technical capabilities (functional backups) are only effective when supported by governance (policy mandating their creation, testing, and use). Policy governs; technology executes.

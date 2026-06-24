@@ -239,3 +239,126 @@ A **purple team exercise** is a collaborative engagement where the red team (att
 
 **Answer: C**
 **GDPR requires a DPIA** for high-risk personal data processing activities, including healthcare data at scale. A DPIA identifies privacy risks, documents mitigation measures, and may require consultation with the supervisory authority before processing begins. (Note: HIPAA risk analysis is separately required under US law.)
+
+---
+
+**Q21.** A SOC 2 Type I report was issued in October. It is now the following August. A security manager is evaluating the same vendor. Why is the Type I report insufficient?
+
+- A) Type I reports expire after 90 days and are no longer valid
+- B) Type I only proves controls were designed correctly on one day — it provides no evidence controls operated effectively during the intervening months
+- C) Type I reports do not cover security; only Type II does
+- D) The report was not issued by a Big Four accounting firm
+
+**Answer: B**
+**SOC 2 Type I** is a point-in-time "snapshot" — it proves controls were designed appropriately on the audit date. It provides **no assurance** about what happened during the 10 months since the report. A vendor could have disabled monitoring, changed configurations, or suffered incidents since October. **Type II** covering the intervening period would be required for meaningful assurance.
+
+---
+
+**Q22.** Which log management metric measures average time from when a breach occurs to when the security team identifies it?
+
+- A) MTTR (Mean Time to Respond)
+- B) MTTD (Mean Time to Detect)
+- C) RTO (Recovery Time Objective)
+- D) TTI (Time to Isolate)
+
+**Answer: B**
+**MTTD (Mean Time to Detect)** measures the average elapsed time between the start of an attack/breach and its detection. Shortening MTTD is a primary goal of SIEM tuning and threat hunting programs — shorter dwell time means less damage. MTTR measures time from detection to remediation.
+
+---
+
+**Q23.** A phishing simulation shows a 35% employee click rate. How should this metric be classified?
+
+- A) A KPI demonstrating that 65% of employees are security-aware
+- B) A KRI indicating elevated organizational risk of social engineering compromise
+- C) A false positive since the emails were simulations, not real attacks
+- D) A baseline metric with no immediate action required
+
+**Answer: B**
+A 35% click rate is a **Key Risk Indicator (KRI)** — a warning signal that 1 in 3 employees would potentially click a real phishing email. KRIs signal increasing risk exposure requiring action (targeted training, phishing-resistant MFA). A KPI measures how well a control is working; a KRI warns that risk is rising.
+
+---
+
+**Q24.** An organization runs SAST as part of their CI/CD pipeline and also runs DAST against the staging environment. A critical vulnerability is found by DAST that SAST missed. Which type of vulnerability is MOST likely?
+
+- A) A hardcoded API key in source code
+- B) An unvalidated string concatenation in SQL queries
+- C) A runtime authentication bypass that only manifests when specific session state is active
+- D) An insecure third-party library with a known CVE
+
+**Answer: C**
+**SAST** analyzes code statically and can find string concatenation, hardcoded secrets, and known vulnerable patterns. **DAST** tests the running application and can find vulnerabilities that only manifest at runtime — such as authentication bypasses that depend on specific session state, environment configuration, or timing conditions that cannot be seen in source code alone.
+
+---
+
+**Q25.** During a red team engagement, the attacking team gains access to the CEO's email account and discovers evidence of insider trading. What should the red team lead do?
+
+- A) Continue the engagement and document it in the final report
+- B) Immediately exploit this access to demonstrate maximum impact
+- C) Stop testing in the CEO's mailbox and report the discovery to the engagement sponsor or legal counsel immediately
+- D) Delete the evidence to protect the CEO and the company
+
+**Answer: C**
+The red team has stumbled upon evidence of a potential crime (insider trading) outside the scope of a security engagement. The correct action is to **stop accessing that data** (scope boundaries), preserve the finding, and immediately escalate to the **engagement sponsor and/or legal counsel**. Ethics (ISC2 Canon 2: act honorably and legally) and scope restrictions both require this action.
+
+---
+
+**Q26.** PCI-DSS requires which two specific assessment activities annually?
+
+- A) Internal audit and external penetration test
+- B) ASV quarterly vulnerability scan and annual penetration test
+- C) SOC 2 Type II audit and annual red team exercise
+- D) Code review and configuration audit
+
+**Answer: B**
+**PCI-DSS** requires:
+1. **ASV (Approved Scanning Vendor) scans** — quarterly, performed by a PCI-approved external scanning vendor
+2. **Penetration test** — annually (and after significant infrastructure changes)
+Both are mandatory and complementary: ASV scans find external vulnerabilities; pen tests validate that those and other vulnerabilities cannot be exploited to reach cardholder data.
+
+---
+
+**Q27.** A CVSS base score of 9.8 is calculated for a vulnerability. The organization's environmental score adjusts this to 4.2 because the affected system is isolated with no internet connectivity. What does this adjustment reflect?
+
+- A) The vulnerability has been patched in the affected environment
+- B) Environmental modifiers adjust the base score for the organization's specific context — reducing the effective risk given compensating controls
+- C) The CVSS base score was incorrectly calculated
+- D) The environmental score replaces the base score for reporting purposes
+
+**Answer: B**
+**CVSS Environmental score** allows organizations to modify the base score based on their specific deployment context — including compensating controls (network isolation), asset criticality, and data sensitivity. A 9.8 in an internet-facing system becomes a 4.2 in an air-gapped environment. This is why organizations should use environmental scores for internal prioritization, not just raw base scores.
+
+---
+
+**Q28.** A vulnerability scanner flags a web server as vulnerable to a critical Apache exploit. Investigation reveals the server runs IIS, not Apache. What type of result is this?
+
+- A) False negative — the scanner missed a real vulnerability
+- B) True positive — the vulnerability has been confirmed
+- C) False positive — the scanner reported a vulnerability that does not exist in this environment
+- D) True negative — the scanner correctly identified no vulnerability
+
+**Answer: C**
+A **false positive** is when the scanner reports a vulnerability that does not actually exist on the target system. This wastes analyst time on investigation of non-issues. Authenticated scans significantly reduce false positives by actually inspecting installed software versions rather than guessing based on banners.
+
+---
+
+**Q29.** An organization discovers a critical SQL injection vulnerability in a web application during a penetration test. The application cannot be patched immediately due to business constraints. Which control provides the MOST immediate protection?
+
+- A) Disable the web application until it can be patched
+- B) Deploy a WAF rule to block SQL injection patterns targeting that endpoint (virtual patch)
+- C) Implement MFA on all web application accounts
+- D) Increase logging and monitoring on the database server
+
+**Answer: B**
+A **WAF (Web Application Firewall) rule** targeting the specific SQL injection pattern provides **virtual patching** — blocking exploitation of the vulnerability without modifying the application code. This is the fastest protective control that does not require application downtime. It is a compensating control, not a substitute for a permanent fix.
+
+---
+
+**Q30.** Which metric would a CISO use to demonstrate the effectiveness of the security program's improvement in detection capability to the board?
+
+- A) Number of vulnerabilities found in the latest scan
+- B) MTTD reduction from 47 days last year to 8 days this quarter
+- C) Percentage of employees completing annual security training
+- D) Total number of security incidents in the past year
+
+**Answer: B**
+**MTTD reduction** (Mean Time to Detect going from 47 days to 8 days) is a **KPI** directly demonstrating improvement in detection capability — the security program now identifies threats 83% faster, reducing attacker dwell time and potential damage. It is business-meaningful, quantitative, and trend-based — the ideal board-level security metric.
